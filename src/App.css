@@ -7,10 +7,57 @@
   border: 2px solid black;
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
+  margin-bottom: 80px;
 }
 
 label {
-  border: 1px solid black;
+  border-top: 1px solid black;
   background: whitesmoke;
   height: 80px;
+}
+
+#drop-down {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid black;
+}
+
+select {
+  width: 40%;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.choices {
+  display: flex;
+  flex-direction: column;
+  height: 130px;
+  justify-content: space-around;
+  margin: 5px 10px 5px 10px;
+}
+.toppings {
+  display: flex;
+  height: 80px;
+  justify-content: space-around;
+  margin: 5px 10px 5px 10px;
+}
+
+#bottom-border {
+  border-bottom: 1px solid black;
+}
+
+#instructions {
+  height: 80px;
+  margin: 25px;
+  border-radius: 5px;
+}
+
+#submit {
+  width: 180px;
+  height: 40px;
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
