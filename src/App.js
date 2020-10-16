@@ -4,6 +4,7 @@ import {
   Link
 } from "react-router-dom";
 import PizzaForm from "./components/PizzaForm";
+import './App.css'
 
 const App = () => {
   return (
