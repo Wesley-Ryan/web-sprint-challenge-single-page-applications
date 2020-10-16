@@ -1,7 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import Pizza from './Pizza'
+import * as yup from 'yup'
+import schema from '../validation/formSchema'
 
 const initialValues= { 
+    name: '',
     size: '', 
     sauce: '',
     pepperoni:false, 
@@ -12,10 +15,22 @@ const initialValues= {
 }
 
 let ordered = false
+const initialDisabled = true
+
+
+
 
 const PizzaForm = () => {
     const [formValues,setFormValues]=useState(initialValues)
     const [pizza, setPizza]=useState()
+    const [disabled, setDisabled] =useState(initialDisabled)
+
+    useEffect(() => {
+        schema.isValid(formValues)
+        .then(valid => { 
+          setDisabled(!valid)
+        })
+      }, [formValues])
 
 
     const onChange = (event) => {
@@ -29,9 +44,15 @@ const PizzaForm = () => {
 
       const onSubmit = (event) => { 
           event.preventDefault()
-          setPizza(formValues)
+          const newPizza= {
+            name: formValues.name.trim(),
+            size: formValues.size.trim(),
+            sauce: formValues.sauce.trim(),
+            intructions:formValues.instructions.trim(),
+            toppings: ['pepperoni', 'cheese', 'meatLovers', 'veggieLovers'].filter((topping => formValues[topping]))
+          }
+          setPizza(newPizza)
           ordered=true
-          
       }
 
       if (ordered) {
@@ -45,6 +66,13 @@ const PizzaForm = () => {
           
 
             <form className='form-container' onSubmit={onSubmit}>
+            <label id='name'>
+                    <h3>Please Enter your name:</h3> 
+                    <input name='name'
+                    value={formValues.name}
+                    onChange={onChange}
+                    />
+                </label>
                 <label>
                     <h3>Choose Your Size</h3>
                 </label>
@@ -172,7 +200,7 @@ const PizzaForm = () => {
                 onChange={onChange}
                 />
 
-                <button id='submit'>Make My PIZZA</button>
+                <button id='submit' disabled={disabled}>Make My PIZZA</button>
 
             </form>
         </div>
