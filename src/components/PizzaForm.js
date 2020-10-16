@@ -199,8 +199,12 @@ const PizzaForm = () => {
                 value={formValues.instructions}
                 onChange={onChange}
                 />
+                <div className='controls'>
 
-                <button id='submit' disabled={disabled}>Make My PIZZA</button>
+                <button id='submit'disabled={disabled}>Make My PIZZA</button> 
+                <button id='cancel' onClick={() => window.location.reload()}>Cancel</button>
+                </div>
+                
 
             </form>
         </div>
