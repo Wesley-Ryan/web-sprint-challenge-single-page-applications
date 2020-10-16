@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import Pizza from './Pizza'
 
 const initialValues= { 
     size: '', 
@@ -10,11 +11,11 @@ const initialValues= {
     instructions:""
 }
 
-const order = false
+let ordered = false
 
 const PizzaForm = () => {
     const [formValues,setFormValues]=useState(initialValues)
-    const [pizza, setPizza]=useState("Your order is on the way")
+    const [pizza, setPizza]=useState()
 
 
     const onChange = (event) => {
@@ -26,14 +27,24 @@ const PizzaForm = () => {
           })
       }
 
+      const onSubmit = (event) => { 
+          event.preventDefault()
+          setPizza(formValues)
+          ordered=true
+          
+      }
 
-    return (
+      if (ordered) {
+        return <Pizza pizza={pizza} />
+
+    } else {
+        return (
         <div >
             <h2>Build Your Own Pizza</h2>
 
-            {order && <div>{pizza}</div>}
+          
 
-            <form className='form-container'>
+            <form className='form-container' onSubmit={onSubmit}>
                 <label>
                     <h3>Choose Your Size</h3>
                 </label>
@@ -165,7 +176,9 @@ const PizzaForm = () => {
 
             </form>
         </div>
-     );
+     )
 }
+}
+
  
 export default PizzaForm;
